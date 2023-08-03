@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.css" rel="stylesheet">
+  
+  <style>
+   
+    .navbar {
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+    }
+
+   
+    .nav-item a {
+      position: relative;
+      text-decoration: none;
+      color: black;
+    }
+
+    
+    .nav-item a:hover {
+      color: #006691;
+      transform: scale(1.1);
+    }
+
+    
+
+    .nav-item.contact-btn a:hover {
+      background-color: #2499c7;
+    }
+
+    .nav-item a i {
+      margin-left: 5px;
+    }
+
+    .icon-img {
+      width: 20px;
+      margin-right: 5px;
+		
+		
+		
+    }
+  </style>
+</head>
+<body>
+ 
+  <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+    <div class="container">
+      
+      <a class="navbar-brand" href="#">
+        <img src="../Img/1x/Artboard 1.png" alt="Logo de la Empresa" height="40">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Documentos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Mensajes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Noticias</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Calendario</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <img src="../Img/user.png" alt="user" class="icon-img">
+              Cerrar Sesión
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-md-6">
+        <div id="calendar"></div>
+      </div>
+    </div>
+  </div>
+	<div class="container my-5">
+    <div class="row">
+      <div class="col-md-6">
+	<div id="liveAlertPlaceholder"></div>
+<button type="button" class="btn btn-primary" id="liveAlertBtn">Tareas Pendientes</button>
+		</div></div></div>
+
+  
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h5  style="font-weight: 800;">Ponte en contacto</h5>
+         	 <p>Correo electrónico: info@example.com</p>
+          		<p>Teléfono: +123 456 7890</p>
+        </div>
+        <div class="col-md-4">
+          <h5 style="font-weight: 800;">Sobre la empresa</h5>
+           <a class="nav-link" href="#">Acerca de nosotros</a>
+            	<a class="nav-link" href="#">Servicios</a>
+            		<a class="nav-link" href="#">Preguntas frecuentes</a>
+           				 <a class="nav-link" href="#">Términos y condiciones</a>
+         </div>
+        <div class="col-md-4">
+          <h5 style="font-weight: 800;">Síguenos en redes sociales</h5>
+          
+        </div>
+      </div>
+      <hr>
+      <p class="text-center">Derechos de autor © 2023 - F2L</p>
+    </div>
+  </footer>
+
+ 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+ 
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.js"></script>
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth', 
+        events: [
+          {
+            title: 'Evento 1',
+            start: '2023-08-01'
+          },
+          {
+            title: 'Evento 2',
+            start: '2023-08-10',
+            end: '2023-08-12'
+          }
+         
+        ]
+      });
+      calendar.render();
+    });
+	  
+	  const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+const appendAlert = (message, type) => {
+  const wrapper = document.createElement('div')
+  wrapper.innerHTML = [
+    `<div class="alert alert-${type} alert-dismissible" role="alert">`,
+    `   <div>${message}</div>`,
+    '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+    '</div>'
+  ].join('')
+
+  alertPlaceholder.append(wrapper)
+}
+
+const alertTrigger = document.getElementById('liveAlertBtn')
+if (alertTrigger) {
+  alertTrigger.addEventListener('click', () => {
+    appendAlert('No tienes tareas pendientes!', 'success')
+  })
+}
+  </script>
+</body>
+</html>
